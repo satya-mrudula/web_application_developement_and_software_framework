@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Combined Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="" ng-init="mySwitch=true; showText=true">
+    <h2>AngularJS Directives Demo</h2>
+    <p>
+        <button ng-disabled="mySwitch">Click Me</button>
+    </p>
+    <p>
+        <input type="checkbox" ng-model="mySwitch">
+        Disable Button
+    </p>
+    <p>
+        Button Disabled: {{ mySwitch }}
+    </p>
+    <hr>
+    <p ng-show="showText">This text is VISIBLE (ng-show)</p>
+    <p ng-hide="showText">This text is HIDDEN (ng-hide)</p>
+    <p>
+        <input type="checkbox" ng-model="showText">
+        Show Text
+    </p>
+</div>
+</body>
+</html>

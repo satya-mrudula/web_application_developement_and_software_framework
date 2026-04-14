@@ -1,0 +1,19 @@
+{
+  "name": "Satty",                 
+  "age": 20,                      
+  "isStudent": true,              
+
+  "skills": ["AngularJS", "Python", "Design"],  
+
+  "address": {                    
+    "city": "Hyderabad",
+    "pincode": 500001
+  },
+
+  "marks": [                      
+    { "subject": "CN", "score": 90 },
+    { "subject": "ML", "score": 95 }
+  ],
+
+  "project": null                 
+}

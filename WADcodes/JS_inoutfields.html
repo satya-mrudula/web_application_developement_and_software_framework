@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+
+  <style>
+    body {
+      background: #f4efe9;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-box {
+      background: #faf7f2;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3a332d;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #cbbfb3;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #e6ddd3;
+      border: 1px solid #8a7f73;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #d8cfc4;
+      transform: scale(1.03);
+    }
+
+    #error {
+      margin-top: 10px;
+      color: red;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    #success {
+      margin-top: 10px;
+      color: green;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-box">
+    <h2>Register</h2>
+
+    <form onsubmit="return validateForm()">
+      <input type="text" id="name" placeholder="Enter name">
+      <input type="email" id="email" placeholder="Enter email">
+      <input type="password" id="password" placeholder="Enter password">
+      <input type="text" id="mobile" placeholder="Enter mobile number">
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="error"></div>
+    <div id="success"></div>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const error = document.getElementById("error");
+      const success = document.getElementById("success");
+
+      error.innerText = "";
+      success.innerText = "";
+
+      // Name
+      if (name === "") {
+        error.innerText = "Name is required";
+        return false;
+      }
+
+      // Email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        error.innerText = "Enter a valid email address";
+        return false;
+      }
+
+      // Password
+      if (password.length < 6) {
+        error.innerText = "Password must be at least 6 characters";
+        return false;
+      }
+
+      // Mobile
+      const mobilePattern = /^[0-9]{10}$/;
+      if (!mobilePattern.test(mobile)) {
+        error.innerText = "Enter valid 10-digit mobile number";
+        return false;
+      }
+
+      // Success
+      success.innerText = "Form validated successfully !!";
+      return false; // keep false so page doesn't reload (demo purpose)
+    }
+  </script>
+
+</body>
+</html>

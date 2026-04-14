@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Objects</title>
+</head>
+<body>
+    <h2>JavaScript Object Demo</h2>
+    <pre id="output"></pre>
+
+    <script>
+        let text = "";
+
+        let student = {
+            name: "Sai",
+            age: 20,
+            course: "JavaScript",
+            marks: 85
+        };
+
+        text += "Accessing Object Values:\n";
+        text += "Name: " + student.name + "\n";
+        text += "Age: " + student["age"] + "\n\n";
+
+        text += "Using for...in loop:\n";
+        for (let key in student) {
+            text += key + " : " + student[key] + "\n";
+        }
+
+        text += "\n";
+
+        text += "Using forEach:\n";
+        Object.entries(student).forEach(function(item) {
+            text += item[0] + " : " + item[1] + "\n";
+        });
+
+        text += "\n";
+
+        text += "Using for...of loop:\n";
+        for (let [key, value] of Object.entries(student)) {
+            text += key + " : " + value + "\n";
+        }
+
+        document.getElementById("output").innerText = text;
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minimal Dynamic Webpage</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px;
+      background: #ffffff;
+      color: #111;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 6px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .pomodoro-time {
+      font-size: 40px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .pomodoro-btns {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 8px 18px;
+      border: 1px solid #333;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f2f2f2;
+    }
+
+    .todo-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .todo-input input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+
+    li {
+      padding: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .files {
+      border: 1px dashed #999;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .files input {
+      display: none;
+    }
+
+    .files label {
+      border: 1px solid #333;
+      padding: 8px 16px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .file-list {
+      margin-top: 15px;
+      text-align: left;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div id="date"></div>
+    <div id="clock"></div>
+  </div>
+
+  <div class="container">
+
+    <div class="box">
+      <h2>Pomodoro Timer</h2>
+      <div class="pomodoro-time" id="pomodoro">25:00</div>
+      <div class="pomodoro-btns">
+        <button onclick="startPomodoro()">Start</button>
+        <button onclick="resetPomodoro()">Reset</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>To-Do List</h2>
+      <div class="todo-input">
+        <input type="text" id="task" placeholder="Enter task">
+        <button onclick="addTask()">Add</button>
+      </div>
+      <ul id="list"></ul>
+    </div>
+
+    <div class="box">
+      <h2>File Folder</h2>
+      <div class="files">
+        <div>Select files</div>
+        <label for="fileInput">Browse</label>
+        <input type="file" id="fileInput" multiple>
+        <div class="file-list" id="fileList"></div>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Status</h2>
+      <div id="msg"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateTop() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+      document.getElementById("date").innerText = now.toDateString();
+    }
+    setInterval(updateTop, 1000);
+    updateTop();
+
+    let time = 25 * 60;
+    let timer;
+
+    function startPomodoro() {
+      if (timer) return;
+      timer = setInterval(() => {
+        if (time <= 0) {
+          clearInterval(timer);
+          timer = null;
+          return;
+        }
+        time--;
+        displayTime();
+      }, 1000);
+    }
+
+    function resetPomodoro() {
+      clearInterval(timer);
+      timer = null;
+      time = 25 * 60;
+      displayTime();
+    }
+
+    function displayTime() {
+      const m = String(Math.floor(time / 60)).padStart(2, "0");
+      const s = String(time % 60).padStart(2, "0");
+      document.getElementById("pomodoro").innerText = `${m}:${s}`;
+    }
+
+    function addTask() {
+      const input = document.getElementById("task");
+      if (!input.value.trim()) return;
+      const li = document.createElement("li");
+      li.innerText = input.value;
+      li.onclick = () => li.classList.toggle("done");
+      document.getElementById("list").appendChild(li);
+      input.value = "";
+    }
+
+    document.getElementById("fileInput").addEventListener("change", function () {
+      const list = document.getElementById("fileList");
+      list.innerHTML = "";
+      Array.from(this.files).forEach(file => {
+        const div = document.createElement("div");
+        div.innerText = "📄 " + file.name;
+        list.appendChild(div);
+      });
+    });
+
+    const texts = [
+      "Focus creates results",
+      "Simple systems win",
+      "Discipline > motivation",
+      "Built for daily use"
+    ];
+    let i = 0;
+    setInterval(() => {
+      document.getElementById("msg").innerText = texts[i];
+      i = (i + 1) % texts.length;
+    }, 3000);
+  </script>
+</body>
+</html>

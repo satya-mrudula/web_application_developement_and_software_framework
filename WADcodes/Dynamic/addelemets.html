@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Element Creation</title>
+</head>
+<body>
+<h3>List</h3>
+<input type="text" id="item" placeholder="Enter item">
+<button onclick="addItem()">Add Item</button>
+<ul id="list"></ul>
+<script>
+function addItem() {
+    let value = document.getElementById("item").value;
+    if (value === "") {
+        alert("Please enter an item");
+        return;
+    }
+    let li = document.createElement("li");
+    li.innerHTML = value;
+    document.getElementById("list").appendChild(li);
+    document.getElementById("item").value = ""; 
+}
+</script>
+</body>
+</html>

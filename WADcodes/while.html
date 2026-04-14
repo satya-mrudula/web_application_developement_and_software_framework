@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>While Loop</h3>
+
+<input type="number" id="num">
+<button onclick="sum()">Find Sum</button>
+
+<p id="ans"></p>
+
+<script>
+function sum() {
+    let n = document.getElementById("num").value;
+    let i = 1, s = 0;
+
+    while (i <= n) {
+        s += i;
+        i++;
+    }
+
+    ans.innerHTML = "Sum = " + s;
+}
+</script>
+
+</body>
+</html>
