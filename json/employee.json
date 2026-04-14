@@ -1,0 +1,28 @@
+{
+  "employee": {
+    "id": 101,
+    "name": "Satty",
+    "age": 21,
+    "isPermanent": true,
+
+    "department": {
+      "deptName": "IT",
+      "location": "Hyderabad"
+    },
+
+    "skills": ["Java", "AngularJS", "Python"],
+
+    "projects": [
+      {
+        "projectName": "Web App",
+        "status": "Completed"
+      },
+      {
+        "projectName": "AI Model",
+        "status": "Ongoing"
+      }
+    ],
+
+    "salary": null
+  }
+}                

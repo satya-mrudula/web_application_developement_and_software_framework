@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>For Loop</h3>
+
+<input type="number" id="n" placeholder="Enter N">
+<button onclick="print()">Print</button>
+
+<p id="res"></p>
+
+<script>
+function print() {
+    let n = document.getElementById("n").value;
+    let text = "";
+
+    for (let i = 1; i <= n; i++) {
+        text += i + " ";
+    }
+
+    res.innerHTML = text;
+}
+</script>
+
+</body>
+</html>

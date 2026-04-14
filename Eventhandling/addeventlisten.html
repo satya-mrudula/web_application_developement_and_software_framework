@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Better addEventListener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #38bdf8;
+            color: #020617;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+            transform: scale(1.05);
+        }
+
+        #output {
+            margin-top: 30px;
+            font-size: 22px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Welcome </h2>
+    <button id="myBtn">Hit me</button>
+    <p id="output"></p>
+
+    <script>
+        const messages = [
+            "Boom!!!!! You clicked it!",
+            "Okay okay, I felt that ",
+            "Button understood the assignment ",
+            "Clicked like a pro "
+        ];
+
+        const button = document.getElementById("myBtn");
+        const output = document.getElementById("output");
+
+        button.addEventListener("click", () => {
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            output.innerHTML = randomMsg;
+            output.style.opacity = 1;
+        });
+    </script>
+
+</body>
+</html>
